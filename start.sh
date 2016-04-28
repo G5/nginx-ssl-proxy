@@ -52,5 +52,10 @@ fi
 # Tell nginx the address and port of the service to proxy to
 sed -i "s/{{TARGET_SERVICE}}/${TARGET_SERVICE}/g;" /etc/nginx/conf.d/proxy.conf
 
+if [ -n "${DISABLE_HTTP2+1}" ] && [ "${DISABLE_HTTP2,,}" = "true" ]; then
+  echo "Disabling http2..."
+  sed -i "s/listen 443 http2;/listen 443;/g;" /etc/nginx/conf.d/proxy.conf
+fi
+
 echo "Starting nginx..."
 nginx -g 'daemon off;'

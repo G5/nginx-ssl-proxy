@@ -64,6 +64,10 @@ To run an SSL termination proxy you must have an existing SSL certificate and ke
       -v /path/to/secrets/htpasswd:/etc/secrets/htpasswd \
       nginx-ssl-proxy
     ```
+5. **Disabling HTTP/2**
+
+  HTTP/2 is on by default when using SSL. To disable it, set the `DISABLE_HTTP2` environment variable to `true`.
+
 4. **Add additional nginx config**
 
    All *.conf from [nginx/extra](nginx/extra) are added during *built* to **/etc/nginx/extra-conf.d** and get included on startup of the container. Using volumes you can overwrite them on *start* of the container:
